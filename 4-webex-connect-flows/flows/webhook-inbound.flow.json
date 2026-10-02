@@ -1,0 +1,10 @@
+{
+  "_placeholder": true,
+  "name": "Webhook Inbound",
+  "description": "PLACEHOLDER FILE - replace with the real flow exported from Webex Connect Flow Studio (Flow > Export).",
+  "notes": [
+    "Trigger: Public HTTPS webhook endpoint. Once published, copy its URL for use when creating the Webex webhooks in 5-webex-webhook-setup.",
+    "Action: Parse the incoming Webex 'messages:created' / 'attachmentAction:created' payload, fetch the full message via the Webex Messaging API (payloads do not include message content), then hand off to the Relay Flow."
+  ],
+  "nodes": []
+}

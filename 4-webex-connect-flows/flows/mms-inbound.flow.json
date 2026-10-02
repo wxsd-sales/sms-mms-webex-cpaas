@@ -1,0 +1,10 @@
+{
+  "_placeholder": true,
+  "name": "MMS Inbound",
+  "description": "PLACEHOLDER FILE - replace with the real flow exported from Webex Connect Flow Studio (Flow > Export).",
+  "notes": [
+    "Trigger: Inbound MMS on the 10DLC number assigned in 3-webex-connect-service.",
+    "Action: Post the message and media attachment(s) into the Webex Space thread via the Webex Messaging API using the Bot token from 1-webex-bot-setup and the roomId from 2-webex-space-setup."
+  ],
+  "nodes": []
+}

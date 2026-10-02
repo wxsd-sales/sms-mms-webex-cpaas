@@ -1,0 +1,10 @@
+{
+  "_placeholder": true,
+  "name": "Relay Flow",
+  "description": "PLACEHOLDER FILE - replace with the real flow exported from Webex Connect Flow Studio (Flow > Export).",
+  "notes": [
+    "Invoked by: Webhook Inbound, once staff reply content has been retrieved.",
+    "Action: Resolve the external participant's phone number for the thread (parentId) and send the reply back out as an SMS/MMS."
+  ],
+  "nodes": []
+}
