@@ -29,12 +29,6 @@ flowchart RL
 
 ```
 
-```mermaid
-block
-  id1("User")
-  blockArrowId6<["SMS/<br>MMS"]>(x)
-  id2("222") space id3("333") space id4("444")
-```
 
 ## Overview
 
