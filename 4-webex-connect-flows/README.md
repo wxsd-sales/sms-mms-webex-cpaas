@@ -25,7 +25,7 @@ This solution is made up of four Webex Connect flows, exported as JSON under [fl
 
    ![Import flow](screenshots/01-import-flow.png)
 
-2. Import each JSON file from [flows/](flows/): `inboundSMS.workflow`, inboundMMS.workflow``, `inboundWebex.workflow`, `session.workflow`.
+2. Import each JSON file from [flows/](flows/): `inboundSMS.workflow`, inboundMMS.workflow``, `inboundWebex.workflow`, `sessionFlow.workflow`.
 
 3. **Configure SMS Inbound:**
    - Open the SMS trigger node and assign your inbound SMS 10DLC number from [3. Webex Connect Service Setup](../3-webex-connect-service/README.md).
