@@ -1,0 +1,45 @@
+flowchart RL
+    USER@{ shape: person, label: "External Participant<br/>SMS/MMS"}
+    WEBEX_CONNECT@{ shape: cloud, label: "Webex Connect Service"}
+    WEBEX_MESSAGING@{ shape: cloud, label: "Webex Messaging Service"}
+    WEBEX_THREAD@{ shape: card, label: "Webex Messaging Thread"}
+
+    subgraph STAFF [Internal Staff]
+        direction LR
+        STAFF_1@{ shape: person, label: "Staff"}
+        STAFF_2@{ shape: person, label: "Staff"}
+        STAFF_3@{ shape: person, label: "Staff"}
+        STAFF_4@{ shape: person, label: "Staff"}
+    end
+
+    USER -->|1 . Inbound SMS/MMS| WEBEX_CONNECT
+    WEBEX_CONNECT -->|2 . Post message to thread| WEBEX_MESSAGING
+    WEBEX_MESSAGING-->|3 . Deliver| WEBEX_THREAD
+
+    WEBEX_THREAD -->|4 . Notify & view| STAFF
+    STAFF -->|5 . Reply in thread| WEBEX_THREAD
+    WEBEX_THREAD -->|6 . Received | WEBEX_MESSAGING
+    WEBEX_MESSAGING -->|7 . messages / attachmentAction created| WEBEX_CONNECT
+    WEBEX_CONNECT -->|8 . Outbound SMS/MMS reply| USER
+
+    %% Animation (read by build-mermaid-svgs.py; see its docstring for the syntax)
+    %% @scenario External participant messages the Webex thread
+    %%   node USER
+    %%   edge USER -> WEBEX_CONNECT
+    %%   node WEBEX_CONNECT
+    %%   edge WEBEX_CONNECT -> WEBEX_MESSAGING
+    %%   node WEBEX_MESSAGING
+    %%   edge WEBEX_MESSAGING -> WEBEX_THREAD
+    %%   node WEBEX_THREAD
+    %%   edge WEBEX_THREAD -> STAFF
+    %%   cluster STAFF
+    %% @scenario Staff reply in the thread is sent back as SMS / MMS
+    %%   cluster STAFF
+    %%   edge STAFF -> WEBEX_THREAD
+    %%   node WEBEX_THREAD
+    %%   edge WEBEX_THREAD -> WEBEX_MESSAGING
+    %%   node WEBEX_MESSAGING
+    %%   edge WEBEX_MESSAGING -> WEBEX_CONNECT
+    %%   node WEBEX_CONNECT
+    %%   edge WEBEX_CONNECT -> USER
+    %%   node USER

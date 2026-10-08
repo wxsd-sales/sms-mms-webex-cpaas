@@ -1,0 +1,59 @@
+name: Build diagram images
+
+# Regenerates images/*.svg from diagrams/*.mmd. The build script only rewrites an image when the
+# rendered output differs, so changes with no visual or animation impact produce no commit.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "diagrams/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-diagrams
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: diagrams/package-lock.json
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # ubuntu-latest already ships Google Chrome, so skip puppeteer's own Chrome download
+      # (--ignore-scripts skips its postinstall) and point the build at the system browser instead.
+      - name: Install mermaid-cli (exact versions from diagrams/package-lock.json)
+        run: npm ci --prefix diagrams --ignore-scripts --no-audit --no-fund
+
+      - name: Locate system Chrome
+        run: |
+          CHROME="$(command -v google-chrome || true)"
+          test -n "$CHROME" || { echo "google-chrome not found on this runner"; exit 1; }
+          echo "PUPPETEER_EXECUTABLE_PATH=$CHROME" >> "$GITHUB_ENV"
+
+      - name: Build SVGs
+        run: python3 diagrams/build-mermaid-svgs.py --publish
+
+      - name: Commit updated images
+        run: |
+          if [ -z "$(git status --porcelain images)" ]; then
+            echo "No visual changes, images are up to date."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add images
+          git commit -m "docs: regenerate diagram images"
+          git push

@@ -2,32 +2,12 @@
 
 This is an example SMS/MMS to Webex solution which shows how to leverage a Webex Messaging Space and Threaded messages to enable members fo the Webex Space to engage in two way conversations with external participants.
 
-```mermaid
-flowchart RL
-    USER@{ shape: person, label: "External Participant<br/>SMS/MMS"}
-    WEBEX_CONNECT@{ shape: cloud, label: "Webex Connect Service"}
-    WEBEX_MESSAGING@{ shape: cloud, label: "Webex Messaging Service"}
-    WEBEX_THREAD@{ shape: card, label: "Webex Messaging Thread"}
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="images/introduction-flow-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="images/introduction-flow-light.svg">
+    <img alt="Animated introduction to the SMS/MMS and Webex message flow between external participants and internal staff" src="images/introduction-flow-light.svg" width="90%">
+</picture>
 
-    subgraph STAFF [Internal Staff]
-        direction LR
-        STAFF_1@{ shape: person, label: "Staff"}
-        STAFF_2@{ shape: person, label: "Staff"}
-        STAFF_3@{ shape: person, label: "Staff"}
-        STAFF_4@{ shape: person, label: "Staff"}
-    end
-
-    USER -->|1 . Inbound SMS/MMS| WEBEX_CONNECT
-    WEBEX_CONNECT -->|2 . Post message to thread| WEBEX_MESSAGING
-    WEBEX_MESSAGING-->|3 . Deliver| WEBEX_THREAD
-
-    WEBEX_THREAD -->|4 . Notify & view| STAFF
-    STAFF -->|5 . Reply in thread| WEBEX_THREAD
-    WEBEX_THREAD -->|6 . Received | WEBEX_MESSAGING
-    WEBEX_MESSAGING -->|7 . messages / attachmentAction created| WEBEX_CONNECT
-    WEBEX_CONNECT -->|8 . Outbound SMS/MMS reply| USER
-
-```
 
 
 ## Overview
@@ -37,6 +17,13 @@ Leveraging Webex Coonect Communication as a Service (CPaas) service flows, this 
 - Inbound SMS/MMS Chat Sessions: New sessions trigger a new thread. Existing sessions have inbound messages appending to thread.
 - Adaptive Card Bard Replies
 - Automatic and Manual based session termination
+
+
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="images/overview-flow-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="images/overview-flow-light.svg">
+    <img alt="Animated overview of the inbound SMS/MMS and Webex flows" src="images/overview-flow-light.svg" width="90%">
+</picture>
 
 ### Sequence Diagram
 
@@ -73,9 +60,11 @@ sequenceDiagram
 
 - Webex Connect Tenant with Admin access
 - Webex Connect 10DLC number with SMS and MMS support, provisioned on the Webex Connect tenant
-- A Webex account (used to create the bot and sign in to the Webex App / space)
+- A Webex Account - User For:
+    - Creating the Webex Bot
+    - Creating the Webex Space which this solution uses
+    - Adding the Webex Bot and Internal Staff users to the solutions Webex Space
 - Internal staff who will respond to conversations must be members of the Webex App with access to the space
-- The Webex Connect Flow endpoints (Webhook Inbound flow URL) must be publicly reachable over HTTPS so Webex can deliver webhook events to it
 
 ### Setup Steps:
 
@@ -88,10 +77,6 @@ Follow these steps in order - each one produces a value (token, room ID, or URL)
 5. [Webex Webhook Setup](5-webex-webhook-setup/README.md) - create the Webex webhooks that notify the flows when staff reply
 
 ## Demo
-
-<!-- Add a walkthrough GIF or screenshots of the end-to-end conversation here -->
-
-<!-- Keep the following statement -->
 
 \*For more demos & PoCs like this, check out our [Webex Labs site](https://collabtoolbox.cisco.com/webex-labs).
 

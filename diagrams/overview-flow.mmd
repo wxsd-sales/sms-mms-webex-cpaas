@@ -1,0 +1,60 @@
+flowchart LR
+  USER@{ shape: person, label: "External<br>Participant"}
+  WEBEX@{ shape: cloud, label: "Webex Services"}
+
+  subgraph SERVICE ["Webex Connect Service"]
+    direction TB
+
+    subgraph SESSIONG [" "]
+      direction LR
+      SESSION["Session Flow<br/>( Pre-Configured Timeout )"]
+      END(["End Session"])
+      SESSION -- "Timeout" --> END
+    end
+
+    subgraph WXG ["Webex"]
+      WXIN["Inbound Webex Flow"]
+    end
+
+    subgraph SMSMMS ["SMS / MMS"]
+      direction BT
+      MMS["Inbound MMS Flow"]
+      SMS["Inbound SMS Flow"]
+      MMS -- "attached files" --> SMS
+    end
+
+    SESSIONG -- "Start / Extend" --- WXG
+    SESSIONG -- "Start / Extend" --- SMSMMS
+    WXG -- "End Session<br>( card button )" --> SESSIONG
+  end
+
+  USER -- "SMS / MMS" --> SERVICE
+  %% Plain line here; the build script adds the arrowhead on the SERVICE end (see @arrow-start below)
+  SERVICE -- "Webhooks<br>[messages]<br>[attachementActions]" --- WEBEX
+  %% @arrow-start SERVICE -> WEBEX
+  %% @arrow-start SESSIONG -> WXG
+  %% @arrow-start SESSIONG -> SMSMMS
+
+  %% Animation (read by build-mermaid-svgs.py; see its docstring for the syntax)
+  %% @scenario Inbound SMS / MMS → Session Started / Timer Reset
+  %%   node USER
+  %%   edge USER -> SERVICE
+  %%   cluster SMSMMS
+  %%   edge SESSIONG -> SMSMMS
+  %%   node SESSION | Session started | (timer reset)
+  %% @scenario Inbound Webex message → Session Timer Reset
+  %%   node WEBEX
+  %%   edge SERVICE -> WEBEX
+  %%   cluster WXG
+  %%   edge SESSIONG -> WXG
+  %%   node SESSION | Session extended | (timer reset)
+  %% @scenario ⏰ Timeout Reached → Session Ends 🛑
+  %%   node SESSION | Session Flow | (No Activity | Timeout ⏰)
+  %%   edge SESSION -> END ended
+  %%   node END ended
+  %% @scenario 🫂 Staff Manually Ends Session → Session Ends 🛑
+  %%   node WEBEX
+  %%   edge SERVICE -> WEBEX
+  %%   cluster WXG
+  %%   edge WXG -> SESSIONG ended
+  %%   node END ended
