@@ -2,13 +2,13 @@
 
 This is an example SMS/MMS to Webex solution which shows how to leverage a Webex Messaging Space and Threaded messages to enable members fo the Webex Space to engage in two way conversations with external participants.
 
-<picture>
-    <source media="(prefers-color-scheme: dark)" srcset="images/introduction-flow-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="images/introduction-flow-light.svg">
-    <img alt="Animated introduction to the SMS/MMS and Webex message flow between external participants and internal staff" src="images/introduction-flow-light.svg" width="90%">
-</picture>
-
-
+<p align="center">
+    <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="images/introduction-flow-dark.svg">
+        <source media="(prefers-color-scheme: light)" srcset="images/introduction-flow-light.svg">
+        <img alt="Animated introduction to the SMS/MMS and Webex message flow between external participants and internal staff" src="images/introduction-flow-light.svg" width="90%">
+    </picture>
+</p>
 
 ## Overview
 
@@ -18,12 +18,13 @@ Leveraging Webex Coonect Communication as a Service (CPaas) service flows, this 
 - Adaptive Card Bard Replies
 - Automatic and Manual based session termination
 
-
-<picture>
-    <source media="(prefers-color-scheme: dark)" srcset="images/overview-flow-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="images/overview-flow-light.svg">
-    <img alt="Animated overview of the inbound SMS/MMS and Webex flows" src="images/overview-flow-light.svg" width="90%">
-</picture>
+<p align="center">
+    <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="images/overview-flow-dark.svg">
+        <source media="(prefers-color-scheme: light)" srcset="images/overview-flow-light.svg">
+        <img alt="Animated overview of the inbound SMS/MMS and Webex flows" src="images/overview-flow-light.svg" width="90%">
+    </picture>
+</p>
 
 ### Sequence Diagram
 
@@ -61,9 +62,9 @@ sequenceDiagram
 - Webex Connect Tenant with Admin access
 - Webex Connect 10DLC number with SMS and MMS support, provisioned on the Webex Connect tenant
 - A Webex Account - User For:
-    - Creating the Webex Bot
-    - Creating the Webex Space which this solution uses
-    - Adding the Webex Bot and Internal Staff users to the solutions Webex Space
+  - Creating the Webex Bot
+  - Creating the Webex Space which this solution uses
+  - Adding the Webex Bot and Internal Staff users to the solutions Webex Space
 - Internal staff who will respond to conversations must be members of the Webex App with access to the space
 
 ### Setup Steps:
