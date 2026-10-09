@@ -22,7 +22,7 @@ flowchart RL
     WEBEX_MESSAGING -->|7 . messages / attachmentAction created| WEBEX_CONNECT
     WEBEX_CONNECT -->|8 . Outbound SMS/MMS reply| USER
 
-    %% Animation (read by build-mermaid-svgs.py; see its docstring for the syntax)
+    %% Animation (read by diagrams/build-mermaid-svgs.mjs; see its header comment for the syntax)
     %% @scenario External participant messages the Webex thread
     %%   node USER
     %%   edge USER -> WEBEX_CONNECT
