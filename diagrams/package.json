@@ -1,8 +1,0 @@
-{
-  "name": "diagram-builder",
-  "private": true,
-  "description": "Pinned toolchain for build-mermaid-svgs.py. Local previews and CI both install from package-lock.json so they render with identical Mermaid and font versions.",
-  "devDependencies": {
-    "@mermaid-js/mermaid-cli": "12.0.0"
-  }
-}

@@ -1,0 +1,15 @@
+{
+  "name": "sms-mms-webex-cpaas",
+  "private": true,
+  "description": "SMS/MMS to Webex CPaaS example. The scripts below build the animated README diagrams from diagrams/*.mmd.",
+  "scripts": {
+    "diagrams": "node diagrams/build-mermaid-svgs.mjs",
+    "diagrams:publish": "node diagrams/build-mermaid-svgs.mjs --publish"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@mermaid-js/mermaid-cli": "12.0.0"
+  }
+}
